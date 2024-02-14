@@ -35,14 +35,14 @@
 	        </tr>
 	        <tr>
 	            <td>
-	                <img src="images/first.png" id="first-btn" />            
+	                <img src="images/first.png" id="first_btn" />            
 	                <img src="images/prev.png" id="prev-btn" />
 	            </td>
 	            <td>
 	                <div id="thumbnail-area"></div>	        
 	            </td>
 	            <td>
-	                <img src="images/next.png" id="next-btn" />            
+	                <img src="images/next.png" id="next_btn" />            
 	                <img src="images/last.png" id="prev-btn" />
 	            </td>
 	        </tr>	    
@@ -51,21 +51,36 @@
     
 	<script>
 
-		const image_root_names = ["Flag_of_Alberta", "Flag_of_British_Columbia", "Flag_of_Manitoba", ""]
+		const image_root_names = ["Flag_of_Alberta", "Flag_of_British_Columbia", "Flag_of_Manitoba"]
 
 
 		const first_load = () => { 
-			// TODO: set the main image to the first image in the array (index 0) - DONE
-			// TODO: set the thumbnail images	
-			
-			document.querySelector("#main-image").src = "images/" + image_root_names[0] + ".png";
+
+			set_main_image (0);
+			set_thumbnails ();
+	
+		} 
 
 
-			// const set_thumbnails = () => {
+		
+		const set_main_image = (index) => {
 
-				
+					document.querySelector("#main-image").src = "images/" + image_root_names[index] + ".png";
 
-				image_root_names.forEach( (image_root_names, index) => {
+					// TODO: set the main-image src image based on the passed parameter	    
+
+					// TODO: set the hidden textbox to the current index (if you take this approach)	    
+
+					// update the thumbnails based on the current selection
+					update_thumbnails(index);
+}
+
+
+const set_thumbnails = () => {
+
+	
+
+					image_root_names.forEach( (image_root_names, index) => {
 					console.log("heyeyeye");
 					// Create a new <img /c>
 					let new_thumb = document.createElement("img");
@@ -81,40 +96,20 @@
 					// Add an event listener
 					new_thumb.addEventListener("click", () => {
 
-						// Call the function above that changes the src attribute of the main image
-						set_main_image(index);
+					// Call the function above that changes the src attribute of the main image
+					set_main_image(index);
 
-				}
-				);
+					}
+);
 
-				// Add the new <img> to the DOM (screen) as the last child of <div id="thumbnails">
-				document.querySelector("#thumbnail-area").append(new_thumb);
+// Add the new <img> to the DOM (screen) as the last child of <div id="thumbnails">
+document.querySelector("#thumbnail-area").append(new_thumb);
 
-				});
+});
 
 
-		// }
-	
-		const set_main_image = (index) => {
+}
 
-			document.querySelector("#main-image").src = "images/" + image_root_names[index] + ".png";
-			// TODO: set the main-image src image based on the passed parameter	    
-	
-			// TODO: set the hidden textbox to the current index (if you take this approach)	    
-	
-			// update the thumbnails based on the current selection
-			update_thumbnails(index);
-		}
-	
-		
-			// TODO: declare a variable for the thumbnail strip html (optional)
-	
-			// TODO: loop through the global array and build the html
-			//       - add an onclick handler to each thumbnail to call set_main_image(index)
-	
-			// TODO: add the html to the divThumbArea
-	
-		} 
 	
 		const update_thumbnails = (current_index) => {
 			// TODO: you'll need to loop through all thumbnails
@@ -142,9 +137,15 @@
 		window.addEventListener("load", first_load);
 
 
-		next_btn.addEventListener("click", () => {
-				set_main_image(image_root_names[index]);
-			})
+
+			function upone () {
+				console.log("yeyeeepppp");
+				document.querySelector("#main-image").src = "images/" + image_root_names[2] + ".png";
+				
+			}
+
+			next_btn.addEventListener("click", upone);
+
 
 			
 
