@@ -51,14 +51,53 @@
     
 	<script>
 
-		let 
+		const image_root_names = ["Flag_of_Alberta", "Flag_of_British_Columbia", "Flag_of_Manitoba", ""]
+
 
 		const first_load = () => { 
-			// TODO: set the main image to the first image in the array (index 0)
-			// TODO: set the thumbnail images		
-		}
+			// TODO: set the main image to the first image in the array (index 0) - DONE
+			// TODO: set the thumbnail images	
+			
+			document.querySelector("#main-image").src = "images/" + image_root_names[0] + ".png";
+
+
+			// const set_thumbnails = () => {
+
+				
+
+				image_root_names.forEach( (image_root_names, index) => {
+					console.log("heyeyeye");
+					// Create a new <img /c>
+					let new_thumb = document.createElement("img");
+
+					// Update the src
+					// <img src="images/dogThumb.png" />
+					new_thumb.src = "images/thumbs/" + "thumb" + image_root_names + ".png";
+
+					// Add a class
+					// <img src="images/dogThumb.png" class="clickable" />
+					new_thumb.className = "clickable"; 
+
+					// Add an event listener
+					new_thumb.addEventListener("click", () => {
+
+						// Call the function above that changes the src attribute of the main image
+						set_main_image(index);
+
+				}
+				);
+
+				// Add the new <img> to the DOM (screen) as the last child of <div id="thumbnails">
+				document.querySelector("#thumbnail-area").append(new_thumb);
+
+				});
+
+
+		// }
 	
 		const set_main_image = (index) => {
+
+			document.querySelector("#main-image").src = "images/" + image_root_names[index] + ".png";
 			// TODO: set the main-image src image based on the passed parameter	    
 	
 			// TODO: set the hidden textbox to the current index (if you take this approach)	    
@@ -67,7 +106,7 @@
 			update_thumbnails(index);
 		}
 	
-		const set_thumbnails = () => {
+		
 			// TODO: declare a variable for the thumbnail strip html (optional)
 	
 			// TODO: loop through the global array and build the html
@@ -84,8 +123,7 @@
 		} 
 	
 		const set_nav_first = () => {
-			// TODO: navigate to the first image (this is the easy one since it's always index zero)
-			
+
 		}
 	
 		const set_nav_last = () => {
@@ -103,7 +141,14 @@
 	
 		window.addEventListener("load", first_load);
 
-	S</script>
+
+		next_btn.addEventListener("click", () => {
+				set_main_image(image_root_names[index]);
+			})
+
+			
+
+	</script>
 	
 </body>
 </html>
