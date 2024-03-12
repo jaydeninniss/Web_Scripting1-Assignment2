@@ -25,9 +25,8 @@
 	        <tr>
 	            <td></td>
 	            <td style="text-align:center;">
-                    <div><img id="main-image" alt="Main Image" /></div>
+                    <div><img id="main-image" alt="Main Image" style="height: 500px;"/></div>
 
-                    <!-- you may or may not use this hidden textbox-->
                     <div><input id="current-index" /></div>    
                 </td>
 	            <td></td>
@@ -36,7 +35,7 @@
 	        <tr>
 	            <td>
 	                <img src="images/first.png" id="first_btn" />            
-	                <img src="images/prev.png" id="prev-btn" />
+	                <img src="images/prev.png" id="prev_btn" />
 	            </td>
 	            <td>
 	                <div id="thumbnail-area"></div>	        
@@ -51,8 +50,8 @@
     
 	<script>
 
-		const image_root_names = ["Flag_of_Alberta", "Flag_of_British_Columbia", "Flag_of_Manitoba"]
-
+		const image_root_names = ["Flag_of_Alberta", "Flag_of_British_Columbia", "Flag_of_Manitoba", "Flag_of_Nunavut", "Flag_of_Ontario", "Flag_of_Quebec", "Flag_of_Saskatchewan"]
+		let current_index = 0;
 
 		const first_load = () => { 
 
@@ -63,16 +62,16 @@
 
 
 		
-		const set_main_image = (index) => {
+		const set_main_image = (current_index) => {
 
-					document.querySelector("#main-image").src = "images/" + image_root_names[index] + ".png";
+					document.querySelector("#main-image").src = "images/" + image_root_names[current_index] + ".png";
 
-					// TODO: set the main-image src image based on the passed parameter	    
+					// TODO: set the main-image src image based on the passed parameter	    DONE
 
-					// TODO: set the hidden textbox to the current index (if you take this approach)	    
+					// TODO: set the hidden textbox to the current index (if you take this approach)	    NO
 
-					// update the thumbnails based on the current selection
-					update_thumbnails(index);
+					// update the thumbnails based on the current selection		AIGHT
+					update_thumbnails(current_index);
 }
 
 
@@ -80,8 +79,7 @@ const set_thumbnails = () => {
 
 	
 
-					image_root_names.forEach( (image_root_names, index) => {
-					console.log("heyeyeye");
+					image_root_names.forEach( (image_root_names, current_index) => {
 					// Create a new <img /c>
 					let new_thumb = document.createElement("img");
 
@@ -97,7 +95,7 @@ const set_thumbnails = () => {
 					new_thumb.addEventListener("click", () => {
 
 					// Call the function above that changes the src attribute of the main image
-					set_main_image(index);
+					set_main_image(current_index);
 
 					}
 );
@@ -115,6 +113,7 @@ document.querySelector("#thumbnail-area").append(new_thumb);
 			// TODO: you'll need to loop through all thumbnails
 			//		- turn on an indicator (eg opacity:1.0) if it's the selected thumb
 			//		- turn off the indicator (eg opacity:0.75) if it's not
+
 		} 
 	
 		const set_nav_first = () => {
@@ -127,11 +126,16 @@ document.querySelector("#thumbnail-area").append(new_thumb);
 	
 		const set_nav_next = () => {
 			// TODO: move to the next image, unless at the end in which case show the first image
+
+			document.querySelector("#main-image").src = "images/" + image_root_names[current_index++] + ".png";
 			
 		}
 	
 		const set_nav_prev = () => {
 			// TODO: move to the previous image, unless at the end in which case show the last image
+			console.log("prev");
+
+			document.querySelector("#main-image").src = "images/" + image_root_names[current_index-1] + ".png";
 		}	
 	
 		window.addEventListener("load", first_load);
@@ -140,11 +144,12 @@ document.querySelector("#thumbnail-area").append(new_thumb);
 
 			function upone () {
 				console.log("yeyeeepppp");
-				document.querySelector("#main-image").src = "images/" + image_root_names[2] + ".png";
+
 				
 			}
 
-			next_btn.addEventListener("click", upone);
+			next_btn.addEventListener("click", set_nav_next);
+			prev_btn.addEventListener("click", set_nav_prev);
 
 
 			
