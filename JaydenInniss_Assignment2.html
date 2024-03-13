@@ -117,9 +117,13 @@ document.querySelector("#thumbnail-area").append(new_thumb);
 
 			const thumbnails = document.querySelectorAll(".clickable");
 
-			thumbs = ".clickable".forEach ((thisthumb, index) => {
+			thumbnails.forEach ((thisthumb, index) => {
 
-				thisthumb.style.border
+				if (current_index !== index){
+				thisthumb.style.opacity = 0.5;
+				} else {
+				thisthumb.style.opacity = 1;
+				}
 			})
 
 		} 
@@ -127,26 +131,34 @@ document.querySelector("#thumbnail-area").append(new_thumb);
 		const set_nav_first = () => {
 			current_index = 0;
 			document.querySelector("#main-image").src = "images/" + image_root_names[current_index] + ".png";
-
+			update_thumbnails (current_index);
 		}
 	
 		const set_nav_last = () => {
 			current_index = image_root_names.length - 1;
 
 			document.querySelector("#main-image").src = "images/" + image_root_names[current_index] + ".png";
-
+			update_thumbnails (current_index);
+			console.log(current_index)
 		}
 	
 		const set_nav_next = () => {
+			console.log(current_index)
+			if (current_index > image_root_names.length-1) {
+				console.log("YOOOO");
+				current_index = 0;
+			}
+			
 			current_index++;
 			document.querySelector("#main-image").src = "images/" + image_root_names[current_index] + ".png";
-
+			update_thumbnails (current_index);
 		}
 	
 		const set_nav_prev = () => {
+			console.log(current_index)
 			current_index--;
 			document.querySelector("#main-image").src = "images/" + image_root_names[current_index] + ".png";
-
+			update_thumbnails (current_index);
 		}	
 	
 		window.addEventListener("load", first_load);
