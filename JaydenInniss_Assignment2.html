@@ -25,7 +25,7 @@
 	        <tr>
 	            <td></td>
 	            <td style="text-align:center;">
-                    <div><img id="main-image" alt="Main Image" style="height: 500px;"/></div>
+                    <div><img id="main-image" alt="Main Image" style="height: 500px; width: 1000px;"/></div>
 
                     <div><input id="current-index" /></div>    
                 </td>
@@ -42,7 +42,7 @@
 	            </td>
 	            <td>
 	                <img src="images/next.png" id="next_btn" />            
-	                <img src="images/last.png" id="prev-btn" />
+	                <img src="images/last.png" id="last_btn" />
 	            </td>
 	        </tr>	    
 	    </table>       
@@ -62,16 +62,17 @@
 
 
 		
-		const set_main_image = (current_index) => {
+		const set_main_image = (index) => {
 
-					document.querySelector("#main-image").src = "images/" + image_root_names[current_index] + ".png";
+					document.querySelector("#main-image").src = "images/" + image_root_names[index] + ".png";
 
 					// TODO: set the main-image src image based on the passed parameter	    DONE
 
 					// TODO: set the hidden textbox to the current index (if you take this approach)	    NO
 
 					// update the thumbnails based on the current selection		AIGHT
-					update_thumbnails(current_index);
+					update_thumbnails(index);
+					current_index=index;
 }
 
 
@@ -79,7 +80,7 @@ const set_thumbnails = () => {
 
 	
 
-					image_root_names.forEach( (image_root_names, current_index) => {
+					image_root_names.forEach( (image_root_names, index) => {
 					// Create a new <img /c>
 					let new_thumb = document.createElement("img");
 
@@ -95,7 +96,7 @@ const set_thumbnails = () => {
 					new_thumb.addEventListener("click", () => {
 
 					// Call the function above that changes the src attribute of the main image
-					set_main_image(current_index);
+					set_main_image(index);
 
 					}
 );
@@ -114,42 +115,50 @@ document.querySelector("#thumbnail-area").append(new_thumb);
 			//		- turn on an indicator (eg opacity:1.0) if it's the selected thumb
 			//		- turn off the indicator (eg opacity:0.75) if it's not
 
+			const thumbnails = document.querySelectorAll(".clickable");
+
+			thumbs = ".clickable".forEach ((thisthumb, index) => {
+
+				thisthumb.style.border
+			})
+
 		} 
 	
 		const set_nav_first = () => {
+			current_index = 0;
+			document.querySelector("#main-image").src = "images/" + image_root_names[current_index] + ".png";
 
 		}
 	
 		const set_nav_last = () => {
-			// TODO: navigate to the last image (should work for any size array)
+			current_index = image_root_names.length - 1;
+
+			document.querySelector("#main-image").src = "images/" + image_root_names[current_index] + ".png";
+
 		}
 	
 		const set_nav_next = () => {
-			// TODO: move to the next image, unless at the end in which case show the first image
+			current_index++;
+			document.querySelector("#main-image").src = "images/" + image_root_names[current_index] + ".png";
 
-			document.querySelector("#main-image").src = "images/" + image_root_names[current_index++] + ".png";
-			
 		}
 	
 		const set_nav_prev = () => {
-			// TODO: move to the previous image, unless at the end in which case show the last image
-			console.log("prev");
+			current_index--;
+			document.querySelector("#main-image").src = "images/" + image_root_names[current_index] + ".png";
 
-			document.querySelector("#main-image").src = "images/" + image_root_names[current_index-1] + ".png";
 		}	
 	
 		window.addEventListener("load", first_load);
 
 
 
-			function upone () {
-				console.log("yeyeeepppp");
 
-				
-			}
 
 			next_btn.addEventListener("click", set_nav_next);
 			prev_btn.addEventListener("click", set_nav_prev);
+			first_btn.addEventListener("click", set_nav_first);
+			last_btn.addEventListener("click", set_nav_last);
 
 
 			
