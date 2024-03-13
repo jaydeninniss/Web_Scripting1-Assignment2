@@ -50,6 +50,10 @@
     
 	<script>
 
+// Jayden Inniss  -  A01363743 - MDIA 2294: Assignment 2
+
+		//Hello, I hope this code reaches you well, lets start by creating an array of the images we will be using.
+		//These names are only the 
 		const image_root_names = ["Flag_of_Alberta", "Flag_of_British_Columbia", "Flag_of_Manitoba", "Flag_of_Nunavut", "Flag_of_Ontario", "Flag_of_Quebec", "Flag_of_Saskatchewan"]
 		let current_index = 0;
 
@@ -66,11 +70,7 @@
 
 					document.querySelector("#main-image").src = "images/" + image_root_names[index] + ".png";
 
-					// TODO: set the main-image src image based on the passed parameter	    DONE
 
-					// TODO: set the hidden textbox to the current index (if you take this approach)	    NO
-
-					// update the thumbnails based on the current selection		AIGHT
 					update_thumbnails(index);
 					current_index=index;
 }
@@ -121,8 +121,10 @@ document.querySelector("#thumbnail-area").append(new_thumb);
 
 				if (current_index !== index){
 				thisthumb.style.opacity = 0.5;
+				thisthumb.style.border = "none";
 				} else {
 				thisthumb.style.opacity = 1;
+				thisthumb.style.border = "thick solid #0000FF";
 				}
 			})
 
@@ -139,26 +141,21 @@ document.querySelector("#thumbnail-area").append(new_thumb);
 
 			document.querySelector("#main-image").src = "images/" + image_root_names[current_index] + ".png";
 			update_thumbnails (current_index);
-			console.log(current_index)
+
 		}
 	
 		const set_nav_next = () => {
-			console.log(current_index)
-			if (current_index > image_root_names.length-1) {
-				console.log("YOOOO");
-				current_index = 0;
-			}
-			
-			current_index++;
-			document.querySelector("#main-image").src = "images/" + image_root_names[current_index] + ".png";
-			update_thumbnails (current_index);
+
+			const nextNum = (current_index >= image_root_names.length-1) ? 0 : current_index + 1;
+			set_main_image(nextNum);
+
+
 		}
 	
 		const set_nav_prev = () => {
-			console.log(current_index)
-			current_index--;
-			document.querySelector("#main-image").src = "images/" + image_root_names[current_index] + ".png";
-			update_thumbnails (current_index);
+
+			const nextNum = (current_index <= 0) ? image_root_names.length-1 : current_index - 1;
+			set_main_image(nextNum);
 		}	
 	
 		window.addEventListener("load", first_load);
